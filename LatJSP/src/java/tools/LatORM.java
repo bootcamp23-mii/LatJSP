@@ -5,6 +5,8 @@
  */
 package tools;
 
+import controllers.RegionController;
+import controllers.RegionControllerInterface;
 import daos.DAOInterface;
 import daos.GeneralDAO;
 import java.math.BigDecimal;
@@ -20,8 +22,11 @@ import org.hibernate.SessionFactory;
 public class LatORM {
     public static void main(String[] args) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-//        DAOInterface<Region> rdao = new GeneralDAO(sessionFactory,Region.class);
+        RegionControllerInterface rc = new RegionController(sessionFactory);
         System.out.println(sessionFactory);
+        for (Region region : rc.getAll()) {
+            System.out.println(region.getName());
+        }
 //        for (Region region : rdao.getAll()) {
 //            System.out.println(region.getName());
 //            for (Country country : region.getCountryList()) {
